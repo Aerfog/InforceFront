@@ -1,0 +1,43 @@
+<p>
+  <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    Create short url
+  </button>
+</p>
+<div class="collapse" id="collapseExample">
+  <div class="card card-body">
+    <form (ngSubmit)="onSubmit()" #urlForm="ngForm">
+      <div class="mb-3">
+        <label for="FullUrl" class="form-label">
+          <h1>Full Url</h1>
+        </label>
+        <input type="text" class="form-control" name="FullUrl" id="FullUrl" [(ngModel)]="model.FullUrl" required>
+        <label for="Description" class="form-label">
+          <h1>Descriptions</h1>
+        </label>
+        <input type="text" class="form-control" name="Description" id="Description" [(ngModel)]="model.Description">
+      </div>
+      <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+    </form>
+  </div>
+</div>
+<table class="table table-striped table-hover">
+  <thead class="table-light">
+  <tr>
+    <th>Full Url</th>
+    <th>Description</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of items">
+    <td>{{ item.fullUrl }}</td>
+    <td>{{ item.description }}</td>
+    <td>
+      <a [attr.href]="'https://localhost:7008/Urls/' + item.id">Details</a>
+      <a *ngIf="item.haveDeleteButton" (click)="removeItem(item.id)" class="btn btn-danger">Delete</a>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+
